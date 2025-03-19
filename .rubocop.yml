@@ -25,3 +25,5 @@ Style/GlobalStdStream:
   Enabled: false
 Metrics/BlockLength:
   Enabled: false
+Style/ArgumentsForwarding:
+  Enabled: false

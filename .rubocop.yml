@@ -13,3 +13,15 @@ Metrics/MethodLength:
   Enabled: false
 Style/AsciiComments:
   Enabled: false
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Style/StringLiterals:
+  Enabled: false
+Layout/SpaceInsideArrayLiteralBrackets:
+  Enabled: false
+Style/SuperWithArgsParentheses:
+  Enabled: false
+Style/GlobalStdStream:
+  Enabled: false
+Metrics/BlockLength:
+  Enabled: false

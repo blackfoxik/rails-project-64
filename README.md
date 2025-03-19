@@ -1,6 +1,8 @@
 [![Actions Status](https://github.com/maddbuzz/rails-project-63/actions/workflows/CI.yml/badge.svg)](https://github.com/maddbuzz/rails-project-63/actions/workflows/CI.yml)
 [![Actions Status](https://github.com/maddbuzz/rails-project-63/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/maddbuzz/rails-project-63/actions/workflows/hexlet-check.yml)
 
+Deploy at: https://rails-project-64-txor.onrender.com
+
 # HexletCode is a DSL that makes it easy to generate forms
 
 A library with which it is convenient to create forms in site templates. This is a popular task for which there are many libraries, such as the [library](https://guides.rubyonrails.org/form_helpers.html) built into Rails or the popular [SimpleForm](https://github.com/heartcombo/simple_form) gem.

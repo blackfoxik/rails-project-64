@@ -1,0 +1,25 @@
+h1 = t('views.posts.index.title')
+
+#posts
+- @posts.each do |post|
+  .card.my-3
+    .card-body
+      p.card-subtitle.text-body-secondary
+        = post.category.name
+      h5.card-title
+        = link_to post.title, post, class: 'link-dark text-decoration-none'
+
+      p.card-text
+        = truncate post.body, length: 300
+      small
+        = t('posts.liked')
+        | :
+        =< post.post_likes_count
+        | &nbsp; &nbsp; &nbsp;
+        = t('posts.published')
+        | :
+        =< l(post.created_at, format: :short)
+        | &nbsp; &nbsp; &nbsp;
+        = t('posts.by')
+        | :
+        =< post.creator.email

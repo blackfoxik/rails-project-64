@@ -1,0 +1,39 @@
+.container.my-4
+  => link_to t('posts.posts'), posts_path
+  | /
+  =< @post.category.name
+
+  div id="#{dom_id @post}"
+    .small.mt-3
+        = t('posts.published')
+        | :
+        =< l(@post.created_at, format: :short)
+        | &nbsp; &nbsp; &nbsp;
+        = t('posts.by')
+        | :
+        =< @post.creator.email
+
+    h1.mb-3 = @post.title
+
+    p = @post.body
+
+    = @post.post_likes_count
+    = render_post_likes_icon(@post)
+
+  - if current_user && @post.creator == current_user
+    .btn-group.btn-group-sm.mt-3 role='group' aria-label='Post button group'
+      = button_to t('posts.actions.update'),
+        edit_post_path(@post),
+        method: :get,
+        class: 'btn btn-primary'
+
+      p = link_to t('posts.actions.delete'),
+          post_path(@post),
+          data: { turbo_method: :delete, turbo_confirm: t('actions.delete.confirm') },
+          class: 'btn btn-outline-danger'
+
+  - if current_user
+    = render '/comments/form', comment: @post.comments.build, url: post_comments_path(@post)
+
+  = render partial: '/comments/comment',
+    collection: @post.comments.where(ancestry: nil).order(created_at: :desc).to_a

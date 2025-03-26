@@ -1,18 +1,19 @@
 # frozen_string_literal: true
 
-$LOAD_PATH.unshift File.expand_path('../lib', __dir__)
-require 'hexlet_code'
+ENV['RAILS_ENV'] ||= 'test'
+require_relative '../config/environment'
+require 'rails/test_help'
 
-require 'minitest'
-require 'minitest/autorun'
-require 'minitest/power_assert'
+module ActiveSupport
+  class TestCase
+    # Run tests in parallel with specified workers
+    parallelize(workers: :number_of_processors)
 
-class TestCase < MiniTest::Test
-  def load_fixture(filename)
-    File.read(File.dirname(__FILE__) + "/fixtures/#{filename}")
-  end
+    # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
+    fixtures :all
 
-  def make_html_oneline(html)
-    html.split("\n").map(&:strip).join
+    def setup
+      self.default_url_options = { locale: I18n.default_locale }
+    end
   end
 end

@@ -1,0 +1,25 @@
+doctype html
+html
+  head
+    title
+      | RailsProject64
+    meta[name='viewport' content='width=device-width,initial-scale=1']
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag 'application', 'data-turbo-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbo-track': 'reload', type: 'module'
+  body
+
+    header
+      = render 'layouts/application/nav'
+
+    main.mt-5.pt-3
+      .container
+        = render 'layouts/application/flash'
+        = yield
+
+  footer
+    .container.footer.sticky-bottom.py-3.bg-light.text-muted
+      = t('footer.powered')
+      br
+      = t('footer.contact_us')

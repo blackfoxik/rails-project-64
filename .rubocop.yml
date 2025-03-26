@@ -3,7 +3,7 @@ require: rubocop-rails
 AllCops:
   NewCops: enable
   Exclude:
-    - 'vendor/'
+    - 'vendor/**/*'
     - 'db/**/*'
     - 'config/**/*'
     - 'script/**/*'

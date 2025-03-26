@@ -4,7 +4,7 @@ require 'test_helper'
 
 class TestHexletCode < TestCase
   def test_that_it_has_a_version_number
-    refute_nil ::HexletCode::VERSION
+    assert_not_nil ::HexletCode::VERSION
   end
 
   def setup

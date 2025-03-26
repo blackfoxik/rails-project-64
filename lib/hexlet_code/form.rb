@@ -6,7 +6,7 @@ autoload :Elements, 'hexlet_code/elements'
 class Form < Element
   def initialize(entity, attributes:)
     @entity = entity
-    super name: 'form', attributes:, content: []
+    super(name: 'form', attributes:, content: [])
   end
 
   def input(name, as: :input, **kwargs)

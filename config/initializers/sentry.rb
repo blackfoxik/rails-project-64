@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Sentry.init do |config|
-  config.dsn = Rails.application.credentials.sentry_dsn
+  config.dsn = 'https://5affa937bdb78bc9d56f80e0ddf2169e@o4509052127281152.ingest.us.sentry.io/4509052136914944'
 
   config.breadcrumbs_logger = %i[active_support_logger http_logger]
 

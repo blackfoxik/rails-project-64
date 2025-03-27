@@ -52,6 +52,8 @@ gem 'slim-rails'
 # Rails forms made easy.
 gem 'simple_form'
 
+gem "sassc-rails"
+
 # Sentry's Ruby SDK allows users to report messages, exceptions, and tracing events.
 gem 'sentry-rails'
 gem 'sentry-ruby'

@@ -1,8 +1,8 @@
 require: rubocop-rails
 
 AllCops:
-  TargetRubyVersion: 3.2.2
   NewCops: enable
+  TargetRubyVersion: 3.2.2
   Exclude:
     - 'vendor/**/*'
     - 'db/**/*'

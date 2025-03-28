@@ -8,7 +8,7 @@ ruby '3.2.2'
 gem 'rails', '~> 7.1.3', '>= 7.1.3.4'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails] was forced to 2.3.3
-gem 'sprockets-rails', '2.3.3'
+gem 'sprockets-rails', '~> 3.4'
 
 # Use pg as the database for Active Record
 gem 'pg', '~> 1.4'

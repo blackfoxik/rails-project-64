@@ -1,6 +1,7 @@
 require: rubocop-rails
 
 AllCops:
+  TargetRubyVersion: 3.2.2
   NewCops: enable
   Exclude:
     - 'vendor/**/*'
@@ -26,7 +27,7 @@ Style/ArgumentsForwarding:
   Enabled: true
 
 Gemspec/RequiredRubyVersion:
-  Enabled: true
+  Enabled: false
 
 Layout/SpaceBeforeComment:
   Enabled: true

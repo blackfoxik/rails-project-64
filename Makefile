@@ -4,7 +4,8 @@ start:
 
 setup:
 	bin/setup
-	db-prepare
+	bin/rails db:reset
+	bin/rails db:fixtures:load
 
 install:
 	bundle check || bundle install

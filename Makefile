@@ -1,5 +1,5 @@
 render-build:
-   bin/render-build.sh
+	bin/render-build.sh
 
 render-start:
 	bundle exec puma -t 5:5 -p ${PORT} -e ${RACK_ENV}

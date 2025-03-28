@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
 Allows you to reduce the form description code many times over due to automatic error handling and various controls."
   spec.homepage = 'https://github.com/maddbuzz/rails-project-63'
   spec.license = 'MIT'
-  spec.required_ruby_version = '>= 3.1.2'
+  spec.required_ruby_version = '>= 3.2.2'
 
   # spec.metadata["allowed_push_host"] = "TODO: Set to your gem server 'https://example.com'"
 

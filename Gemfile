@@ -7,7 +7,7 @@ ruby '3.2.2'
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 7.1.3', '>= 7.1.3.4'
 
-# The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
+# The original asset pipeline for Rails [https://github.com/rails/sprockets-rails] was forced to 2.3.3
 gem 'sprockets-rails', '2.3.3'
 
 # Use pg as the database for Active Record

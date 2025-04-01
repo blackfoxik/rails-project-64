@@ -1,0 +1,42 @@
+require: rubocop-rails
+
+AllCops:
+  NewCops: enable
+  TargetRubyVersion: 3.2.2
+  Exclude:
+    - 'vendor/**/*'
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'script/**/*'
+    - 'bin/*'
+    #- 'Gemfile'
+Metrics/BlockLength:
+  Exclude:
+    - 'config/**/*'
+
+Style/Documentation:
+  Enabled: false
+
+Rails/I18nLocaleTexts:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+Style/ArgumentsForwarding:
+  Enabled: true
+
+Gemspec/RequiredRubyVersion:
+  Enabled: false
+
+Layout/SpaceBeforeComment:
+  Enabled: true
+
+Layout/LeadingCommentSpace:
+  Enabled: true
+
+Style/StringLiterals:
+  Enabled: true
+
+Layout/SpaceBeforeComment:
+  Enabled: true

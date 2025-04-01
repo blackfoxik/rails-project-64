@@ -1,0 +1,451 @@
+Sentry HTTP Transport will connect to https://o4509052127281152.ingest.us.sentry.io
+Initializing the Sentry background worker with 4 threads
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/antonlisicyn/Hexlet/hexlet-assignments/rails-basics-ru/rails-project-64/config/environment.rb:7)
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "categories"[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "categories" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "post_comments"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "post_comments" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "content" varchar, "post_id" integer NOT NULL, "user_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "ancestry" varchar)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_post_comments_on_ancestry" ON "post_comments" ("ancestry")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_post_comments_on_post_id" ON "post_comments" ("post_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_post_comments_on_user_id" ON "post_comments" ("user_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "post_likes"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "post_likes" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "post_id" integer NOT NULL, "user_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_post_likes_on_post_id" ON "post_likes" ("post_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_post_likes_on_user_id_and_post_id" ON "post_likes" ("user_id", "post_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_post_likes_on_user_id" ON "post_likes" ("user_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "posts"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "posts" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar, "body" text, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "creator_id" integer, "category_id" integer, "post_likes_count" integer DEFAULT 0)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_posts_on_category_id" ON "posts" ("category_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_posts_on_creator_id" ON "posts" ("creator_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "users"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime(6), "remember_created_at" datetime(6), "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "apost_comments" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "content" varchar DEFAULT NULL, "post_id" integer NOT NULL, "user_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "ancestry" varchar DEFAULT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_apost_comments_on_user_id" ON "apost_comments" ("user_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_apost_comments_on_post_id" ON "apost_comments" ("post_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_apost_comments_on_ancestry" ON "apost_comments" ("ancestry")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "apost_comments" ("id","content","post_id","user_id","created_at","updated_at","ancestry")
+                     SELECT "id","content","post_id","user_id","created_at","updated_at","ancestry" FROM "post_comments"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "post_comments"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "post_comments" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "content" varchar DEFAULT NULL, "post_id" integer NOT NULL, "user_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "ancestry" varchar DEFAULT NULL, CONSTRAINT "fk_rails_bfdc8d8659"
+FOREIGN KEY ("post_id")
+  REFERENCES "posts" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_post_comments_on_ancestry" ON "post_comments" ("ancestry")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_post_comments_on_post_id" ON "post_comments" ("post_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_post_comments_on_user_id" ON "post_comments" ("user_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "post_comments" ("id","content","post_id","user_id","created_at","updated_at","ancestry")
+                     SELECT "id","content","post_id","user_id","created_at","updated_at","ancestry" FROM "apost_comments"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "apost_comments"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TEMPORARY TABLE "apost_comments" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "content" varchar DEFAULT NULL, "post_id" integer NOT NULL, "user_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "ancestry" varchar DEFAULT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_apost_comments_on_user_id" ON "apost_comments" ("user_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_apost_comments_on_post_id" ON "apost_comments" ("post_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_apost_comments_on_ancestry" ON "apost_comments" ("ancestry")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "apost_comments" ("id","content","post_id","user_id","created_at","updated_at","ancestry")
+                     SELECT "id","content","post_id","user_id","created_at","updated_at","ancestry" FROM "post_comments"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "post_comments"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "post_comments" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "content" varchar DEFAULT NULL, "post_id" integer NOT NULL, "user_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "ancestry" varchar DEFAULT NULL, CONSTRAINT "fk_rails_bfdc8d8659"
+FOREIGN KEY ("post_id")
+  REFERENCES "posts" ("id")
+, CONSTRAINT "fk_rails_56efacbd2f"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_post_comments_on_ancestry" ON "post_comments" ("ancestry")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_post_comments_on_post_id" ON "post_comments" ("post_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_post_comments_on_user_id" ON "post_comments" ("user_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "post_comments" ("id","content","post_id","user_id","created_at","updated_at","ancestry")
+                     SELECT "id","content","post_id","user_id","created_at","updated_at","ancestry" FROM "apost_comments"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "apost_comments"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TEMPORARY TABLE "apost_likes" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "post_id" integer NOT NULL, "user_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_apost_likes_on_user_id" ON "apost_likes" ("user_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE UNIQUE INDEX "tindex_apost_likes_on_user_id_and_post_id" ON "apost_likes" ("user_id", "post_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_apost_likes_on_post_id" ON "apost_likes" ("post_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "apost_likes" ("id","post_id","user_id","created_at","updated_at")
+                     SELECT "id","post_id","user_id","created_at","updated_at" FROM "post_likes"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "post_likes"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "post_likes" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "post_id" integer NOT NULL, "user_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_a04bfa7e81"
+FOREIGN KEY ("post_id")
+  REFERENCES "posts" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_post_likes_on_post_id" ON "post_likes" ("post_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_post_likes_on_user_id_and_post_id" ON "post_likes" ("user_id", "post_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_post_likes_on_user_id" ON "post_likes" ("user_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "post_likes" ("id","post_id","user_id","created_at","updated_at")
+                     SELECT "id","post_id","user_id","created_at","updated_at" FROM "apost_likes"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "apost_likes"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TEMPORARY TABLE "apost_likes" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "post_id" integer NOT NULL, "user_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_apost_likes_on_user_id" ON "apost_likes" ("user_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE UNIQUE INDEX "tindex_apost_likes_on_user_id_and_post_id" ON "apost_likes" ("user_id", "post_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_apost_likes_on_post_id" ON "apost_likes" ("post_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "apost_likes" ("id","post_id","user_id","created_at","updated_at")
+                     SELECT "id","post_id","user_id","created_at","updated_at" FROM "post_likes"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "post_likes"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "post_likes" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "post_id" integer NOT NULL, "user_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_a04bfa7e81"
+FOREIGN KEY ("post_id")
+  REFERENCES "posts" ("id")
+, CONSTRAINT "fk_rails_d07653f350"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_post_likes_on_post_id" ON "post_likes" ("post_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_post_likes_on_user_id_and_post_id" ON "post_likes" ("user_id", "post_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_post_likes_on_user_id" ON "post_likes" ("user_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "post_likes" ("id","post_id","user_id","created_at","updated_at")
+                     SELECT "id","post_id","user_id","created_at","updated_at" FROM "apost_likes"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "apost_likes"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aposts" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar DEFAULT NULL, "body" text DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "creator_id" integer DEFAULT NULL, "category_id" integer DEFAULT NULL, "post_likes_count" integer DEFAULT 0)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_aposts_on_creator_id" ON "aposts" ("creator_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_aposts_on_category_id" ON "aposts" ("category_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "aposts" ("id","title","body","created_at","updated_at","creator_id","category_id","post_likes_count")
+                     SELECT "id","title","body","created_at","updated_at","creator_id","category_id","post_likes_count" FROM "posts"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "posts"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "posts" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar DEFAULT NULL, "body" text DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "creator_id" integer DEFAULT NULL, "category_id" integer DEFAULT NULL, "post_likes_count" integer DEFAULT 0, CONSTRAINT "fk_rails_9b1b26f040"
+FOREIGN KEY ("category_id")
+  REFERENCES "categories" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_posts_on_category_id" ON "posts" ("category_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_posts_on_creator_id" ON "posts" ("creator_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "posts" ("id","title","body","created_at","updated_at","creator_id","category_id","post_likes_count")
+                     SELECT "id","title","body","created_at","updated_at","creator_id","category_id","post_likes_count" FROM "aposts"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "aposts"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aposts" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar DEFAULT NULL, "body" text DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "creator_id" integer DEFAULT NULL, "category_id" integer DEFAULT NULL, "post_likes_count" integer DEFAULT 0)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_aposts_on_creator_id" ON "aposts" ("creator_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_aposts_on_category_id" ON "aposts" ("category_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "aposts" ("id","title","body","created_at","updated_at","creator_id","category_id","post_likes_count")
+                     SELECT "id","title","body","created_at","updated_at","creator_id","category_id","post_likes_count" FROM "posts"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "posts"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "posts" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar DEFAULT NULL, "body" text DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "creator_id" integer DEFAULT NULL, "category_id" integer DEFAULT NULL, "post_likes_count" integer DEFAULT 0, CONSTRAINT "fk_rails_9b1b26f040"
+FOREIGN KEY ("category_id")
+  REFERENCES "categories" ("id")
+, CONSTRAINT "fk_rails_4037146b6f"
+FOREIGN KEY ("creator_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_posts_on_category_id" ON "posts" ("category_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_posts_on_creator_id" ON "posts" ("creator_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "posts" ("id","title","body","created_at","updated_at","creator_id","category_id","post_likes_count")
+                     SELECT "id","title","body","created_at","updated_at","creator_id","category_id","post_likes_count" FROM "aposts"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "aposts"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20250321032205)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20250321032204),
+(20250321032203),
+(20250321032202),
+(20250321032159),
+(20250320215656),
+(20250320215655),
+(20250320215654),
+(20250320215653),
+(20250320215652),
+(20250320210605),
+(20250320205332);[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2025-03-31 13:34:58.657572', '2025-03-31 13:34:58.657573') RETURNING "key"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', 'af2a91f9dceb9030d6981a07f1dbaaeaa7ed50b4', '2025-03-31 13:34:58.658781', '2025-03-31 13:34:58.658782') RETURNING "key"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "categories"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "categories" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "post_comments"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "post_comments" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "content" varchar, "post_id" integer NOT NULL, "user_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "ancestry" varchar)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_post_comments_on_ancestry" ON "post_comments" ("ancestry")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_post_comments_on_post_id" ON "post_comments" ("post_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_post_comments_on_user_id" ON "post_comments" ("user_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "post_likes"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "post_likes" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "post_id" integer NOT NULL, "user_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_post_likes_on_post_id" ON "post_likes" ("post_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_post_likes_on_user_id_and_post_id" ON "post_likes" ("user_id", "post_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_post_likes_on_user_id" ON "post_likes" ("user_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "posts"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "posts" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar, "body" text, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "creator_id" integer, "category_id" integer, "post_likes_count" integer DEFAULT 0)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_posts_on_category_id" ON "posts" ("category_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_posts_on_creator_id" ON "posts" ("creator_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "users"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime(6), "remember_created_at" datetime(6), "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TEMPORARY TABLE "apost_comments" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "content" varchar DEFAULT NULL, "post_id" integer NOT NULL, "user_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "ancestry" varchar DEFAULT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_apost_comments_on_user_id" ON "apost_comments" ("user_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_apost_comments_on_post_id" ON "apost_comments" ("post_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_apost_comments_on_ancestry" ON "apost_comments" ("ancestry")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "apost_comments" ("id","content","post_id","user_id","created_at","updated_at","ancestry")
+                     SELECT "id","content","post_id","user_id","created_at","updated_at","ancestry" FROM "post_comments"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "post_comments"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "post_comments" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "content" varchar DEFAULT NULL, "post_id" integer NOT NULL, "user_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "ancestry" varchar DEFAULT NULL, CONSTRAINT "fk_rails_bfdc8d8659"
+FOREIGN KEY ("post_id")
+  REFERENCES "posts" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_post_comments_on_ancestry" ON "post_comments" ("ancestry")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_post_comments_on_post_id" ON "post_comments" ("post_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_post_comments_on_user_id" ON "post_comments" ("user_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "post_comments" ("id","content","post_id","user_id","created_at","updated_at","ancestry")
+                     SELECT "id","content","post_id","user_id","created_at","updated_at","ancestry" FROM "apost_comments"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "apost_comments"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TEMPORARY TABLE "apost_comments" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "content" varchar DEFAULT NULL, "post_id" integer NOT NULL, "user_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "ancestry" varchar DEFAULT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_apost_comments_on_user_id" ON "apost_comments" ("user_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_apost_comments_on_post_id" ON "apost_comments" ("post_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_apost_comments_on_ancestry" ON "apost_comments" ("ancestry")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "apost_comments" ("id","content","post_id","user_id","created_at","updated_at","ancestry")
+                     SELECT "id","content","post_id","user_id","created_at","updated_at","ancestry" FROM "post_comments"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "post_comments"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "post_comments" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "content" varchar DEFAULT NULL, "post_id" integer NOT NULL, "user_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "ancestry" varchar DEFAULT NULL, CONSTRAINT "fk_rails_bfdc8d8659"
+FOREIGN KEY ("post_id")
+  REFERENCES "posts" ("id")
+, CONSTRAINT "fk_rails_56efacbd2f"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_post_comments_on_ancestry" ON "post_comments" ("ancestry")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_post_comments_on_post_id" ON "post_comments" ("post_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_post_comments_on_user_id" ON "post_comments" ("user_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "post_comments" ("id","content","post_id","user_id","created_at","updated_at","ancestry")
+                     SELECT "id","content","post_id","user_id","created_at","updated_at","ancestry" FROM "apost_comments"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "apost_comments"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TEMPORARY TABLE "apost_likes" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "post_id" integer NOT NULL, "user_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_apost_likes_on_user_id" ON "apost_likes" ("user_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE UNIQUE INDEX "tindex_apost_likes_on_user_id_and_post_id" ON "apost_likes" ("user_id", "post_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_apost_likes_on_post_id" ON "apost_likes" ("post_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "apost_likes" ("id","post_id","user_id","created_at","updated_at")
+                     SELECT "id","post_id","user_id","created_at","updated_at" FROM "post_likes"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "post_likes"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "post_likes" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "post_id" integer NOT NULL, "user_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_a04bfa7e81"
+FOREIGN KEY ("post_id")
+  REFERENCES "posts" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_post_likes_on_post_id" ON "post_likes" ("post_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_post_likes_on_user_id_and_post_id" ON "post_likes" ("user_id", "post_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_post_likes_on_user_id" ON "post_likes" ("user_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "post_likes" ("id","post_id","user_id","created_at","updated_at")
+                     SELECT "id","post_id","user_id","created_at","updated_at" FROM "apost_likes"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "apost_likes"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TEMPORARY TABLE "apost_likes" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "post_id" integer NOT NULL, "user_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_apost_likes_on_user_id" ON "apost_likes" ("user_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE UNIQUE INDEX "tindex_apost_likes_on_user_id_and_post_id" ON "apost_likes" ("user_id", "post_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_apost_likes_on_post_id" ON "apost_likes" ("post_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "apost_likes" ("id","post_id","user_id","created_at","updated_at")
+                     SELECT "id","post_id","user_id","created_at","updated_at" FROM "post_likes"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "post_likes"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "post_likes" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "post_id" integer NOT NULL, "user_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_a04bfa7e81"
+FOREIGN KEY ("post_id")
+  REFERENCES "posts" ("id")
+, CONSTRAINT "fk_rails_d07653f350"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_post_likes_on_post_id" ON "post_likes" ("post_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_post_likes_on_user_id_and_post_id" ON "post_likes" ("user_id", "post_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_post_likes_on_user_id" ON "post_likes" ("user_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "post_likes" ("id","post_id","user_id","created_at","updated_at")
+                     SELECT "id","post_id","user_id","created_at","updated_at" FROM "apost_likes"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "apost_likes"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aposts" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar DEFAULT NULL, "body" text DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "creator_id" integer DEFAULT NULL, "category_id" integer DEFAULT NULL, "post_likes_count" integer DEFAULT 0)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_aposts_on_creator_id" ON "aposts" ("creator_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_aposts_on_category_id" ON "aposts" ("category_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "aposts" ("id","title","body","created_at","updated_at","creator_id","category_id","post_likes_count")
+                     SELECT "id","title","body","created_at","updated_at","creator_id","category_id","post_likes_count" FROM "posts"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "posts"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "posts" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar DEFAULT NULL, "body" text DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "creator_id" integer DEFAULT NULL, "category_id" integer DEFAULT NULL, "post_likes_count" integer DEFAULT 0, CONSTRAINT "fk_rails_9b1b26f040"
+FOREIGN KEY ("category_id")
+  REFERENCES "categories" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_posts_on_category_id" ON "posts" ("category_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_posts_on_creator_id" ON "posts" ("creator_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "posts" ("id","title","body","created_at","updated_at","creator_id","category_id","post_likes_count")
+                     SELECT "id","title","body","created_at","updated_at","creator_id","category_id","post_likes_count" FROM "aposts"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "aposts"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aposts" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar DEFAULT NULL, "body" text DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "creator_id" integer DEFAULT NULL, "category_id" integer DEFAULT NULL, "post_likes_count" integer DEFAULT 0)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_aposts_on_creator_id" ON "aposts" ("creator_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_aposts_on_category_id" ON "aposts" ("category_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "aposts" ("id","title","body","created_at","updated_at","creator_id","category_id","post_likes_count")
+                     SELECT "id","title","body","created_at","updated_at","creator_id","category_id","post_likes_count" FROM "posts"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "posts"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "posts" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar DEFAULT NULL, "body" text DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "creator_id" integer DEFAULT NULL, "category_id" integer DEFAULT NULL, "post_likes_count" integer DEFAULT 0, CONSTRAINT "fk_rails_9b1b26f040"
+FOREIGN KEY ("category_id")
+  REFERENCES "categories" ("id")
+, CONSTRAINT "fk_rails_4037146b6f"
+FOREIGN KEY ("creator_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_posts_on_category_id" ON "posts" ("category_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_posts_on_creator_id" ON "posts" ("creator_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "posts" ("id","title","body","created_at","updated_at","creator_id","category_id","post_likes_count")
+                     SELECT "id","title","body","created_at","updated_at","creator_id","category_id","post_likes_count" FROM "aposts"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "aposts"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20250321032205)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20250321032204),
+(20250321032203),
+(20250321032202),
+(20250321032159),
+(20250320215656),
+(20250320215655),
+(20250320215654),
+(20250320215653),
+(20250320215652),
+(20250320210605),
+(20250320205332);[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2025-03-31 13:34:58.719300', '2025-03-31 13:34:58.719301') RETURNING "key"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Update (0.0ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = 'test', "updated_at" = '2025-03-31 13:34:58.719955' WHERE "ar_internal_metadata"."key" = 'environment'[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', 'af2a91f9dceb9030d6981a07f1dbaaeaa7ed50b4', '2025-03-31 13:34:58.720599', '2025-03-31 13:34:58.720599') RETURNING "key"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mCategory Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."name" = ? LIMIT ?[0m  [["name", "Books"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mCategory Create (0.0ms)[0m  [1m[32mINSERT INTO "categories" ("name", "created_at", "updated_at") VALUES (?, ?, ?) RETURNING "id"[0m  [["name", "Books"], ["created_at", "2025-03-31 13:34:58.736301"], ["updated_at", "2025-03-31 13:34:58.736301"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mCategory Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."name" = ? LIMIT ?[0m  [["name", "Music"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mCategory Create (0.4ms)[0m  [1m[32mINSERT INTO "categories" ("name", "created_at", "updated_at") VALUES (?, ?, ?) RETURNING "id"[0m  [["name", "Music"], ["created_at", "2025-03-31 13:34:58.737788"], ["updated_at", "2025-03-31 13:34:58.737788"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mCategory Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."name" = ? LIMIT ?[0m  [["name", "Code"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mCategory Create (0.4ms)[0m  [1m[32mINSERT INTO "categories" ("name", "created_at", "updated_at") VALUES (?, ?, ?) RETURNING "id"[0m  [["name", "Code"], ["created_at", "2025-03-31 13:34:58.739204"], ["updated_at", "2025-03-31 13:34:58.739204"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mCategory Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."name" = ? LIMIT ?[0m  [["name", "Other"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mCategory Create (0.4ms)[0m  [1m[32mINSERT INTO "categories" ("name", "created_at", "updated_at") VALUES (?, ?, ?) RETURNING "id"[0m  [["name", "Other"], ["created_at", "2025-03-31 13:34:58.740761"], ["updated_at", "2025-03-31 13:34:58.740761"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+[Sentry::SessionFlusher] thread killed
+Shutting down background worker
+Sentry HTTP Transport will connect to https://o4509052127281152.ingest.us.sentry.io
+Initializing the Sentry background worker with 4 threads
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/antonlisicyn/Hexlet/hexlet-assignments/rails-basics-ru/rails-project-64/config/environment.rb:7)
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixtures Load (0.4ms)[0m  [1m[31mDELETE FROM "categories";
+DELETE FROM "post_comments";
+DELETE FROM "post_likes";
+DELETE FROM "posts";
+DELETE FROM "users";
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2025-03-31 13:35:00.299827', '2025-03-31 13:35:00.299827');
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2025-03-31 13:35:00.299827', '2025-03-31 13:35:00.299827');
+INSERT INTO "post_comments" ("id", "content", "post_id", "user_id", "created_at", "updated_at", "ancestry") VALUES (980190962, 'first', 647284951, 980190962, '2025-03-31 13:35:00.300569', '2025-03-31 13:35:00.300569', '/');
+INSERT INTO "post_comments" ("id", "content", "post_id", "user_id", "created_at", "updated_at", "ancestry") VALUES (647284951, 'this is comment with comments', 647284951, 980190962, '2025-03-31 13:35:00.300569', '2025-03-31 13:35:00.300569', '/');
+INSERT INTO "post_comments" ("id", "content", "post_id", "user_id", "created_at", "updated_at", "ancestry") VALUES (717865707, 'commented comment', 647284951, 980190962, '2025-03-31 13:35:00.300569', '2025-03-31 13:35:00.300569', '/647284951/');
+INSERT INTO "post_comments" ("id", "content", "post_id", "user_id", "created_at", "updated_at", "ancestry") VALUES (141964304, 'deep comment', 647284951, 980190962, '2025-03-31 13:35:00.300569', '2025-03-31 13:35:00.300569', '/647284951/717865707/');
+INSERT INTO "post_likes" ("id", "post_id", "user_id", "created_at", "updated_at") VALUES (270817253, 647284951, 980190962, '2025-03-31 13:35:00.301217', '2025-03-31 13:35:00.301217');
+INSERT INTO "posts" ("id", "title", "body", "created_at", "updated_at", "creator_id", "category_id") VALUES (647284951, 'Vel alias non id quam.', 'Id explicabo vitae. Aut et commodi. Nisi aut voluptate. Laudantium omnis consequatur. Quia eligendi doloremque. Est fugit consequuntur. Eligendi voluptatem dolores. Est et blanditiis. Numquam voluptatum cupidi.', '2025-03-31 13:35:00.301545', '2025-03-31 13:35:00.301545', 980190962, 980190962);
+INSERT INTO "posts" ("id", "title", "body", "created_at", "updated_at", "creator_id", "category_id") VALUES (538806297, 'Ipsum dolore eligendi distinctio qui.', 'Illum qui et. Similique eum est. Dolores est asperiores. Et est soluta. Impedit molestiae aspernatur. Maiores qui aliquam. Et quis qui. Velit voluptas omnis. Similique occaecati voluptas. Voluptas consequuntur.', '2025-03-31 13:35:00.301545', '2025-03-31 13:35:00.301545', 298486374, 298486374);
+INSERT INTO "users" ("id", "email", "encrypted_password", "created_at", "updated_at") VALUES (980190962, 'one@test.test', 'MyString', '2025-03-31 13:35:00.301848', '2025-03-31 13:35:00.301848');
+INSERT INTO "users" ("id", "email", "encrypted_password", "created_at", "updated_at") VALUES (298486374, 'two@test.test', 'MyString', '2025-03-31 13:35:00.301848', '2025-03-31 13:35:00.301848')[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_key_check[0m
+[Sentry::SessionFlusher] thread killed
+Shutting down background worker

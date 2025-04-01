@@ -519,3 +519,8 @@ Initializing the Sentry background worker with 4 threads
 DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/antonlisicyn/Hexlet/hexlet-assignments/rails-basics-ru/rails-project-64/config/environment.rb:7)
 [Sentry::SessionFlusher] thread killed
 Shutting down background worker
+Sentry HTTP Transport will connect to https://o4509052127281152.ingest.us.sentry.io
+Initializing the Sentry background worker with 4 threads
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/antonlisicyn/Hexlet/hexlet-assignments/rails-basics-ru/rails-project-64/config/environment.rb:7)
+[Sentry::SessionFlusher] thread killed
+Shutting down background worker

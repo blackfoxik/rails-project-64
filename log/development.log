@@ -449,3 +449,68 @@ INSERT INTO "users" ("id", "email", "encrypted_password", "created_at", "updated
   [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_key_check[0m
 [Sentry::SessionFlusher] thread killed
 Shutting down background worker
+Sentry HTTP Transport will connect to https://o4509052127281152.ingest.us.sentry.io
+Initializing the Sentry background worker with 4 threads
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/antonlisicyn/Hexlet/hexlet-assignments/rails-basics-ru/rails-project-64/config/environment.rb:7)
+Started GET "/?locale=en" for ::1 at 2025-04-01 13:03:05 +0300
+[Tracing] Starting <http.server> transaction </>
+[Profiler] Started
+  [1m[36mActiveRecord::SchemaMigration Load (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PostsController#index as HTML
+  Parameters: {"locale"=>"en"}
+  Rendering layout layouts/application.html.slim
+  Rendering posts/index.html.slim within layouts/application
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY "posts"."created_at" DESC[0m
+  ↳ app/views/posts/index.html.slim:4
+  [1m[36mCategory Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" IN (?, ?)[0m  [["id", 298486374], ["id", 980190962]]
+  ↳ app/views/posts/index.html.slim:4
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IN (?, ?)[0m  [["id", 298486374], ["id", 980190962]]
+  ↳ app/views/posts/index.html.slim:4
+  Rendered posts/index.html.slim within layouts/application (Duration: 148.5ms | Allocations: 330269)
+  Rendered layouts/application/_nav.html.slim (Duration: 5.0ms | Allocations: 12246)
+  Rendered layouts/application/_flash.html.slim (Duration: 1.1ms | Allocations: 3229)
+  Rendered layout layouts/application.html.slim (Duration: 383.5ms | Allocations: 602610)
+Completed 200 OK in 400ms (Views: 386.2ms | ActiveRecord: 2.7ms | Allocations: 612586)
+
+
+[Profiler] Stopped
+[Profiler] Some samples thrown away
+[Transport] Sending envelope with items [transaction, profile] ada6d01b2ab346eb85ffb649ef006813 to Sentry
+Started GET "/assets/application.css" for ::1 at 2025-04-01 13:03:05 +0300
+[Profiler] Discarding profile because transaction not sampled
+Started GET "/assets/hexlet_logo.jpg" for ::1 at 2025-04-01 13:03:05 +0300
+Started GET "/assets/application.js" for ::1 at 2025-04-01 13:03:05 +0300
+[Profiler] Discarding profile because transaction not sampled
+[Profiler] Discarding profile because transaction not sampled
+Started GET "/?locale=en" for ::1 at 2025-04-01 13:03:10 +0300
+[Tracing] Starting <http.server> transaction </>
+[Profiler] Started
+Processing by PostsController#index as HTML
+  Parameters: {"locale"=>"en"}
+  Rendering layout layouts/application.html.slim
+  Rendering posts/index.html.slim within layouts/application
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY "posts"."created_at" DESC[0m
+  ↳ app/views/posts/index.html.slim:4
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" IN (?, ?)[0m  [["id", 298486374], ["id", 980190962]]
+  ↳ app/views/posts/index.html.slim:4
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IN (?, ?)[0m  [["id", 298486374], ["id", 980190962]]
+  ↳ app/views/posts/index.html.slim:4
+  Rendered posts/index.html.slim within layouts/application (Duration: 5.9ms | Allocations: 2491)
+  Rendered layouts/application/_nav.html.slim (Duration: 1.3ms | Allocations: 925)
+  Rendered layouts/application/_flash.html.slim (Duration: 0.1ms | Allocations: 24)
+  Rendered layout layouts/application.html.slim (Duration: 10.3ms | Allocations: 5203)
+Completed 200 OK in 12ms (Views: 10.5ms | ActiveRecord: 0.5ms | Allocations: 5543)
+
+
+[Profiler] Stopped
+[Transport] Sending envelope with items [transaction, profile] 8bf332dd6ef84739bd291e753b4ee859 to Sentry
+Started GET "/assets/application.css" for ::1 at 2025-04-01 13:03:10 +0300
+[Profiler] Discarding profile because transaction not sampled
+Started GET "/assets/hexlet_logo.jpg" for ::1 at 2025-04-01 13:03:10 +0300
+Started GET "/assets/application.js" for ::1 at 2025-04-01 13:03:10 +0300
+[Profiler] Discarding profile because transaction not sampled
+[Profiler] Discarding profile because transaction not sampled
+[Sentry::SessionFlusher] thread killed
+[Transport] Sending envelope with items [client_report]  to Sentry
+[Transport] Sending envelope with items [sessions]  to Sentry
+Shutting down background worker

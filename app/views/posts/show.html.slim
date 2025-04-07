@@ -17,7 +17,7 @@
 
     p = @post.body
 
-    = @post.post_likes_count
+    = @post.likes_count
     = render_post_likes_icon(@post)
 
   - if current_user && @post.creator == current_user

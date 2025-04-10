@@ -40,3 +40,6 @@ Style/StringLiterals:
 
 Layout/SpaceBeforeComment:
   Enabled: true
+
+Metrics/AbcSize:
+  Enabled: false

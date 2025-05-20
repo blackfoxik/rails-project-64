@@ -6,6 +6,19 @@ on:
     branches: [ main ]
 
 jobs:
+  deploy_github:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Linting
+        run: make lint
+
+      - name: Installation
+        run: bundle install
+          
   scan_ruby:
     runs-on: ubuntu-latest
 

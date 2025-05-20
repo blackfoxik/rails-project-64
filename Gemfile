@@ -49,6 +49,9 @@ group :development, :test do
 
   # Use sqlite3 as the database for Active Record
   gem "sqlite3", ">= 1.4"
+
+  gem 'slim_lint'
+
 end
 
 group :development do

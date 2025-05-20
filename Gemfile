@@ -51,6 +51,8 @@ group :development, :test do
   gem "sqlite3", ">= 1.4"
 
   gem 'slim_lint'
+
+  gem 'minitest-power_assert'
 end
 
 group :development do

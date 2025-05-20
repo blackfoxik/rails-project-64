@@ -4,4 +4,7 @@ lint:
 
 lint_manual:
 	./bin/rubocop
+
+setup:
+	bundle install
 	
